@@ -1,8 +1,6 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.14)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-project(node_fontinfo)
 
 if(APPLE)
 	if (NOT CMAKE_OSX_ARCHITECTURES)
@@ -10,26 +8,28 @@ if(APPLE)
 	endif()
 	if (NOT CMAKE_OSX_DEPLOYMENT_TARGET)
 		if ("${CMAKE_OSX_ARCHITECTURES}" STREQUAL "arm64")
-			set(CMAKE_OSX_DEPOLYMENT_TARGET "11.0")
+			set(CMAKE_OSX_DEPLOYMENT_TARGET "11.0")
 		else()
 			set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15")
 		endif()
 	endif()
 endif()
 
+project(node_fontinfo)
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 set(freetype2_INSTALL ${CMAKE_BINARY_DIR}/freetype2)
 
 SET(NODEJS_URL "https://artifacts.electronjs.org/headers/dist" CACHE STRING "Node.JS URL")
 SET(NODEJS_NAME "iojs" CACHE STRING "Node.JS Name")
-SET(NODEJS_VERSION "v29.4.3" CACHE STRING "Node.JS Version")
+SET(NODEJS_VERSION "v43.2.0" CACHE STRING "Node.JS Version")
 
 include(NodeJS)
 include(ExternalProject)
 
 nodejs_init()
 
-set(freetype2_URL "https://download-mirror.savannah.gnu.org/releases/freetype/freetype-2.10.4.tar.gz")
+set(freetype2_URL "https://download-mirror.savannah.gnu.org/releases/freetype/freetype-2.14.3.tar.gz")
 set(freetype2_SOURCE_DIR "${CMAKE_SOURCE_DIR}/external/freetype2")
 
 if(WIN32)

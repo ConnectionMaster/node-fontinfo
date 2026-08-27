@@ -19,7 +19,7 @@ env:
   BUILD_DIRECTORY: "build"
   DISTRIBUTE_DIRECTORY: "distribute"
   RELEASE_BUCKET: "slobs-node-fontinfo"
-  ELECTRON_VERSION: "v29.4.3"
+  ELECTRON_VERSION: "v43.2.0"
 
 permissions:
   contents: read
@@ -27,7 +27,7 @@ permissions:
 jobs:
   build:
     name: 'Build a package'
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
       - uses: actions/checkout@v3
       - name: Show GitHub context
@@ -39,9 +39,9 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
         shell: bash
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: '24.x'
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache --check-cache
       - name: Add MSBuild to PATH
@@ -159,9 +159,9 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
         shell: bash
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: '24.x'
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache --check-cache
       - name: Build
